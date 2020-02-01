@@ -1,0 +1,39 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "API REST para MondoDB con implementación CRUD",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erickfabricio/api.git"
+  },
+  "keywords": [
+    "api",
+    "rest",
+    "crud",
+    "mongodb"
+  ],
+  "author": "Erick Fabricio Martínez Castellanos - https://erickfabricio.com",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/erickfabricio/api/issues"
+  },
+  "homepage": "https://github.com/erickfabricio/api#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-promise-router": "^3.0.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.6",
+    "morgan": "^1.9.1",
+    "userdb": "^1.0.13"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
