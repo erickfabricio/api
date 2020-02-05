@@ -11,9 +11,8 @@ function validate(password, hash) {
 
 module.exports = { generate, validate };
 
-/* TEST 
+/* TEST */
 password = "abc123";
 hash = generate(password);
 rest = validate(password, hash);
 console.log("password:" + password + "\nhash:" + hash + "\nrest:" + rest);
-*/

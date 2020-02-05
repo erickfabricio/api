@@ -33,8 +33,8 @@ app.use(bodyParser.json());
 app.use('/api/entities', require('./routers/adm-entities'));
 app.use('/api/modules', require('./routers/adm-modules'));
 
-app.use('/api/rols', require('./routers/adm-rols'));
-app.use('/api/users', validateToken, require('./routers/adm-users'));
+app.use('/api/roles', require('./routers/adm-roles'));
+app.use('/api/users', require('./routers/adm-users'));
 app.use('/api/apps', require('./routers/adm-apps'));
 
 app.use('/api/tokens', require('./routers/adm-tokens'));

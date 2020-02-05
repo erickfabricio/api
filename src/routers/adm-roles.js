@@ -6,7 +6,7 @@ const {
     save,
     update,
     remove
-} = require('../controllers/adm-rols');
+} = require('../controllers/adm-roles');
 
 router.get('/', find);
 router.get('/:rolId', findById);

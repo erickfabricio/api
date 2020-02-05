@@ -4,8 +4,8 @@ module.exports = {
 
     find: async (req, res, next) => {
         const users = await User.find(req.body.query, req.body.parms);
-        res.status(200).json({ ok: true, message: 'It´s OK', users: users});
-        //res.status(200).json(users);
+        //res.status(200).json({ ok: true, message: 'It´s OK', users: users});
+        res.status(200).json(users);
     },
 
     findById: async (req, res, next) => {

@@ -1,11 +1,11 @@
-const Rol = require('../models/adm-rols');
+const Rol = require('../models/adm-roles');
 
 module.exports = {
 
     find: async (req, res, next) => {
         const rols = await Rol.find(req.body.query, req.body.parms);
-        res.status(200).json({ ok: true, message: 'It´s OK', rols: rols});
-        //res.status(200).json(rols);
+        //res.status(200).json({ ok: true, message: 'It´s OK', rols: rols});
+        res.status(200).json(rols);
     },
 
     findById: async (req, res, next) => {
