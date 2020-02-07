@@ -9,9 +9,9 @@ const {
 } = require('../controllers/adm-roles');
 
 router.get('/', find);
-router.get('/:rolId', findById);
+router.get('/:roleId', findById);
 router.post('/', save);
-router.put('/:rolId', update);
-router.delete('/:rolId', remove);
+router.put('/:roleId', update);
+router.delete('/:roleId', remove);
 
 module.exports = router;

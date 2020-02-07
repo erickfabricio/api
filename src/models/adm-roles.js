@@ -1,26 +1,26 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    name: String,    
+    name: String,
     description: String,
     creationDate: { type: Date, default: Date.now },
     state: String,
     privileges: {
-        entities : [{
+        collections: [{
             _id: false,
-            entity: String,
+            name: String,
             view: Boolean,
             edit: Boolean,
             delete: Boolean
         }],
-        modules : [{
+        modules: [{
             _id: false,
-            module: String,
+            name: String,
             access: Boolean
-        }]
+        }]        
     }
 }, {
     versionKey: false
 });
 
-module.exports = mongoose.model('adm-rols', schema);
+module.exports = mongoose.model('adm-roles', schema);

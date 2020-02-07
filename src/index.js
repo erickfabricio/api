@@ -30,7 +30,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //Routers
-app.use('/api/entities', require('./routers/adm-entities'));
+app.use('/api/collections', require('./routers/adm-collections'));
 app.use('/api/modules', require('./routers/adm-modules'));
 
 app.use('/api/roles', require('./routers/adm-roles'));

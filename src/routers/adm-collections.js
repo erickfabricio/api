@@ -6,12 +6,12 @@ const {
     save,
     update,
     remove
-} = require('../controllers/adm-entities');
+} = require('../controllers/adm-collections');
 
 router.get('/', find);
-router.get('/:entityId', findById);
+router.get('/:collectionId', findById);
 router.post('/', save);
-router.put('/:entityId', update);
-router.delete('/:entityId', remove);
+router.put('/:collectionId', update);
+router.delete('/:collectionId', remove);
 
 module.exports = router;
