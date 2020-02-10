@@ -5,18 +5,17 @@ const schema = new mongoose.Schema({
     description: String,
     creationDate: { type: Date, default: Date.now },
     state: String,
-    privileges: {
+    privileges: {        
+        modules: [{            
+            name: String,
+            access: Boolean
+        }],
         collections: [{
-            _id: false,
+            //_id: false,
             name: String,
             view: Boolean,
             edit: Boolean,
             delete: Boolean
-        }],
-        modules: [{
-            _id: false,
-            name: String,
-            access: Boolean
         }]        
     }
 }, {

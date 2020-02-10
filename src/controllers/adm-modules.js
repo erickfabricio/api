@@ -3,8 +3,7 @@ const Module = require('../models/adm-modules');
 module.exports = {
 
     find: async (req, res, next) => {
-        const modules = await Module.find(req.body.query, req.body.parms);
-        //res.status(200).json({ ok: true, message: 'It´s OK', modules: modules});
+        const modules = await Module.find(req.body.query, req.body.parms);        
         res.status(200).json(modules);
     },
 

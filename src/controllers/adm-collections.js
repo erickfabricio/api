@@ -9,29 +9,29 @@ module.exports = {
     },
 
     findById: async (req, res, next) => {
-        const { entityId } = req.params;
-        const entity = await Collection.findById(entityId);
-        res.status(200).json(entity);
+        const { collectionId } = req.params;
+        const collection = await Collection.findById(collectionId);
+        res.status(200).json(collection);
     },
 
     save: async (req, res, next) => {
         const newCollection = new Collection(req.body);
-        const entity = await newCollection.save();
-        res.status(200).json(entity);
+        const collection = await newCollection.save();
+        res.status(200).json(collection);
     },
 
     update: async (req, res, next) => {
-        const { entityId } = req.params;
+        const { collectionId } = req.params;
         const updateCollection = req.body;
-        const oldCollection = await Collection.findByIdAndUpdate(entityId, updateCollection, { useFindAndModify: false });
+        const oldCollection = await Collection.findByIdAndUpdate(collectionId, updateCollection, { useFindAndModify: false });
         const newCollection = await Collection.findById(oldCollection.id);
         res.status(200).json(newCollection);
     },
 
     remove: async (req, res, next) => {
-        const { entityId } = req.params;
-        const entity = await Collection.findByIdAndRemove(entityId);
-        res.status(200).json(entity);
+        const { collectionId } = req.params;
+        const collection = await Collection.findByIdAndRemove(collectionId);
+        res.status(200).json(collection);
     }
             
 }
