@@ -35,9 +35,11 @@ app.use('/api/modules', require('./routers/adm-modules'));
 
 app.use('/api/roles', require('./routers/adm-roles'));
 app.use('/api/users', require('./routers/adm-users'));
-app.use('/api/apps', require('./routers/adm-apps'));
 
+app.use('/api/apps', require('./routers/adm-apps'));
 app.use('/api/tokens', require('./routers/adm-tokens'));
+app.use('/api/logs', require('./routers/adm-logs'));
+app.use('/api/data', require('./routers/adm-data'));
 
 app.use('/api/session', require('./routers/session'));
 //app.use('/api/users', validateToken, require('./routers/users'));

@@ -63,7 +63,7 @@ module.exports = {
 
                     
 
-                    res.status(200).json({ ok: true, menssage: "Correct login", tokenId: tokenModel._id, token: token, user: user, role: role });
+                    res.status(200).json({ ok: true, menssage: "Correct login", tokenId: tokenModel._id, token: token, key: config.key, user: user, role: role });
                 } else {
                     res.status(200).json({ ok: false, menssage: "Incorrect password" });
                 }
