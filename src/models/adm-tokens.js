@@ -4,8 +4,9 @@ const schema = new mongoose.Schema({
     generation: String, //user or aplication
     time: String, //seconds
     key: String,
-    payload: String,
+    playload: String,
     token: String,
+    signOut: { type: Date, default: null },    
     creationDate: { type: Date, default: Date.now },
     state: String
 }, {
