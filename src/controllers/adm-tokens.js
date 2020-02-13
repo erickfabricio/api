@@ -3,8 +3,7 @@ const Token = require('../models/adm-tokens');
 module.exports = {
 
     find: async (req, res, next) => {
-        const tokens = await Token.find(req.body.query, req.body.parms);
-        //res.status(200).json({ ok: true, message: 'It´s OK', tokens: tokens});
+        const tokens = await Token.find(req.body.query, req.body.parms).sort('-creationDate');        
         res.status(200).json(tokens);
     },
 

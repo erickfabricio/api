@@ -53,6 +53,7 @@ module.exports = {
 
                     //Update token                    
                     tokenModel.generation = user._id;
+                    tokenModel.generationName = user.name;
                     tokenModel.time = time;
                     tokenModel.key = config.key;
                     tokenModel.playload = JSON.stringify(playload);
@@ -85,10 +86,15 @@ module.exports = {
         jwt.verify(token, config.key, async function (err, info) {
             if (!err) {
                 
-                let tokenModel = await Token.findById(info.data.tokenId);
+                //let tokenModel = await Token.findById(info.data.tokenId);
+
+                let tokenModel = await Token.findByIdAndUpdate(info.data.tokenId, {state: "Inactive", signOut: new Date()})
+                console.log(tokenModel);
+
+                /*
                 tokenModel.state = "Inactive";
                 tokenModel.signOut = new Date();
-                tokenModel.update();
+                tokenModel.update();*/
              
                 return res.status(200).json({ ok: true, menssage: "Token sign out correct" });
 
@@ -116,10 +122,11 @@ module.exports = {
                 let tokenModel = await Token.findById(info.data.tokenId);
                 let userModel = await User.findById(tokenModel.generation);
                 let roleModel = await Role.findById(userModel.role);
-                                                
+                
+                /*
                 console.log(tokenModel);
                 console.log(userModel);
-                console.log(roleModel);
+                console.log(roleModel);*/
 
                 //Return user information and role
                 let data = {
