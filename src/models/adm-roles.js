@@ -13,8 +13,9 @@ const schema = new mongoose.Schema({
         collections: [{
             //_id: false,
             name: String,
-            view: Boolean,
-            edit: Boolean,
+            create: Boolean,
+            read: Boolean,
+            update: Boolean,
             delete: Boolean
         }]        
     }
