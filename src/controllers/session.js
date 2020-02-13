@@ -6,6 +6,11 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+//Seconds
+const SESSION_TIME_1H = 3600;
+const SESSION_TIME_24H = 86400;
+const SESSION_TIME = SESSION_TIME_1H;
+
 module.exports = {
 
     signUp: async (req, res, next) => {
@@ -38,7 +43,7 @@ module.exports = {
                     //console.log(tokenModel);
 
                     //Assignment of values
-                    let time = Math.floor(Date.now() / 1000) + (60 * 60 * 24);
+                    let time = Math.floor(Date.now() / 1000) + (SESSION_TIME);
                     let playload = { tokenId: tokenModel._id };
                     
                     //Generate token
@@ -54,7 +59,7 @@ module.exports = {
                     //Update token                    
                     tokenModel.generation = user._id;
                     tokenModel.generationName = user.name;
-                    tokenModel.time = time;
+                    tokenModel.time = SESSION_TIME;
                     tokenModel.key = config.key;
                     tokenModel.playload = JSON.stringify(playload);
                     tokenModel.token = token;                    
