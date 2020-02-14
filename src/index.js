@@ -42,6 +42,9 @@ app.use('/api/logs', require('./routers/adm-logs'));
 app.use('/api/data', require('./routers/adm-data'));
 
 app.use('/api/session', require('./routers/session'));
+
+app.use('/api/catalogs', require('./routers/adm-catalogs'));
+
 //app.use('/api/users', validateToken, require('./routers/users'));
 
 

@@ -1,0 +1,21 @@
+const mongoose = require('mongoose');
+
+const schema = new mongoose.Schema({
+    
+    name: String,
+    description: String,
+    creationDate: { type: Date, default: Date.now },
+    state: String,
+
+    list: [
+        {
+            name: String,
+            description: String
+        }
+    ]
+
+}, {
+    versionKey: false
+});
+
+module.exports = mongoose.model('adm-catalogs', schema);
