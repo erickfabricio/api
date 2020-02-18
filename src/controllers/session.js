@@ -34,7 +34,7 @@ module.exports = {
         const user = await User.findOne({ mail: req.body.mail });
         
         if (user) {
-            bcrypt.compare(req.body.password, user.password, async function (err, result) {
+            bcrypt.compare(req.body.password, user.hash, async function (err, result) {
                 if (result) {
                     
                     //Creating token JSON
