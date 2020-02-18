@@ -14,4 +14,4 @@ const schema = new mongoose.Schema({
         versionKey: false
     });
 
-module.exports = mongoose.model('adm-tokens', schema);
+module.exports = mongoose.model('adm.tokens', schema);

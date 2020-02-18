@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    
+
     name: String,
     description: String,
     creationDate: { type: Date, default: Date.now },
@@ -10,7 +10,9 @@ const schema = new mongoose.Schema({
     list: [
         {
             name: String,
-            description: String
+            description: String,
+            creationDate: { type: Date, default: Date.now },
+            state: String
         }
     ]
 
@@ -18,4 +20,4 @@ const schema = new mongoose.Schema({
     versionKey: false
 });
 
-module.exports = mongoose.model('adm-catalogs', schema);
+module.exports = mongoose.model('adm.catalogs', schema);

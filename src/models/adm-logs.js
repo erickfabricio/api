@@ -9,4 +9,4 @@ const schema = new mongoose.Schema({
         versionKey: false
     });
 
-module.exports = mongoose.model('adm-logs', schema);
+module.exports = mongoose.model('adm.logs', schema);

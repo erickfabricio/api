@@ -10,4 +10,4 @@ const schema = new mongoose.Schema({
         versionKey: false
     });
 
-module.exports = mongoose.model('adm-apps', schema);
+module.exports = mongoose.model('adm.apps', schema);

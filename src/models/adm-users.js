@@ -12,4 +12,4 @@ const schema = new mongoose.Schema({
     versionKey: false
 });
 
-module.exports = mongoose.model('adm-users', schema);
+module.exports = mongoose.model('adm.users', schema);

@@ -23,4 +23,4 @@ const schema = new mongoose.Schema({
     versionKey: false
 });
 
-module.exports = mongoose.model('adm-roles', schema);
+module.exports = mongoose.model('adm.roles', schema);
