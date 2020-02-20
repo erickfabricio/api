@@ -8,7 +8,8 @@ const schema = new mongoose.Schema({
     description: String,
     creationDate: { type: Date, default: Date.now },
     state: String,    
-    role: String
+    role: String,
+    creator: String
 }, {
     versionKey: false
 });

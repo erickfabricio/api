@@ -5,8 +5,7 @@ const saltRounds = 10;
 module.exports = {
 
     find: async (req, res, next) => {
-        const users = await User.find(req.body.query, req.body.parms);
-        //res.status(200).json({ ok: true, message: 'It´s OK', users: users});
+        const users = await User.find(req.body.query, req.body.parms);        
         res.status(200).json(users);
     },
 
@@ -24,7 +23,7 @@ module.exports = {
             const user = await newUser.save();
             res.status(200).json({ ok: true, menssage: "User registered successfully", user: user });
         } else {
-            res.status(401).json({ ok: false, menssage: "Email is already registered" });
+            res.status(200).json({ ok: false, menssage: "Email is already registered" });
         }
     },
 
@@ -33,24 +32,29 @@ module.exports = {
         const { userId } = req.params;
         const updateUser = req.body;
 
-        result = true;
+        result = true; //Respuesta de carga
+
+        const currentUser = await User.findById(userId);
 
         //Mail validation
-        if (req.body.mail) {
-            const currentUser = await User.findById(userId);
+        if (req.body.mail && currentUser.mail != req.body.mail) {
+            console.log("Mail validation");
             if (currentUser.mail != req.body.mail) {
                 const user = await User.findOne({ mail: req.body.mail });
                 if (user) {
                     result = false;
-                    res.status(401).json({ ok: false, menssage: "Email is already registered" });
+                    res.status(200).json({ ok: false, menssage: "Email is already registered" });
                 }
             }
         }
 
         //Password validation
-        if (req.body.password) {
+        if (req.body.password && currentUser.password != req.body.password) {
+            console.log("Password validation");
             req.body.hash = bcrypt.hashSync(req.body.password, saltRounds);
         }
+
+
 
         if (result) {
             const oldUser = await User.findByIdAndUpdate(userId, updateUser, { useFindAndModify: false });

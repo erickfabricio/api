@@ -29,50 +29,54 @@ module.exports = {
     login: async (req, res, next) => {
         //Test 
         console.log(req.body);
-        
+
         //Search user        
         const user = await User.findOne({ mail: req.body.mail });
-        
-        if (user) {
-            bcrypt.compare(req.body.password, user.hash, async function (err, result) {
-                if (result) {
-                    
-                    //Creating token JSON
-                    const tokenModel = new Token();
-                    tokenModel.save();                    
-                    //console.log(tokenModel);
 
-                    //Assignment of values
-                    let time = Math.floor(Date.now() / 1000) + (SESSION_TIME);
-                    let playload = { tokenId: tokenModel._id };
-                    
-                    //Generate token
-                    let token = jwt.sign(
-                        {
-                            exp: time,
-                            data: playload
-                        },
-                        config.key
-                    );
-                    //console.log(token);
+        if (user) { //Validating user existence
+            if (user.state == 'Active') { //Validating user status
+                bcrypt.compare(req.body.password, user.hash, async function (err, result) {
+                    if (result) {
 
-                    //Update token                    
-                    tokenModel.generation = user._id;
-                    tokenModel.generationName = user.name;
-                    tokenModel.time = SESSION_TIME;
-                    tokenModel.key = config.key;
-                    tokenModel.playload = JSON.stringify(playload);
-                    tokenModel.token = token;                    
-                    tokenModel.state = "Active";                                                            
-                    tokenModel.update();
+                        //Creating token JSON
+                        const tokenModel = new Token();
+                        tokenModel.save();
+                        //console.log(tokenModel);
 
-                    //console.log(tokenModel);
+                        //Assignment of values
+                        let time = Math.floor(Date.now() / 1000) + (SESSION_TIME);
+                        let playload = { tokenId: tokenModel._id };
 
-                    res.status(200).json({ ok: true, menssage: "Correct login", token: token });
-                } else {
-                    res.status(200).json({ ok: false, menssage: "Incorrect password" });
-                }
-            })
+                        //Generate token
+                        let token = jwt.sign(
+                            {
+                                exp: time,
+                                data: playload
+                            },
+                            config.key
+                        );
+                        //console.log(token);
+
+                        //Update token                    
+                        tokenModel.generation = user._id;
+                        tokenModel.generationName = user.name;
+                        tokenModel.time = SESSION_TIME;
+                        tokenModel.key = config.key;
+                        tokenModel.playload = JSON.stringify(playload);
+                        tokenModel.token = token;
+                        tokenModel.state = "Active";
+                        tokenModel.update();
+
+                        //console.log(tokenModel);
+
+                        res.status(200).json({ ok: true, menssage: "Correct login", token: token });
+                    } else {
+                        res.status(200).json({ ok: false, menssage: "Incorrect password" });
+                    }
+                })
+            } else {
+                res.status(200).json({ ok: false, menssage: "Inactive User" });
+            }
         } else {
             res.status(200).json({ ok: false, menssage: "Email not registered" });
         }
@@ -90,24 +94,24 @@ module.exports = {
 
         jwt.verify(token, config.key, async function (err, info) {
             if (!err) {
-                
+
                 //let tokenModel = await Token.findById(info.data.tokenId);
 
-                let tokenModel = await Token.findByIdAndUpdate(info.data.tokenId, {state: "Inactive", signOut: new Date()})
+                let tokenModel = await Token.findByIdAndUpdate(info.data.tokenId, { state: "Inactive", signOut: new Date() })
                 console.log(tokenModel);
 
                 /*
                 tokenModel.state = "Inactive";
                 tokenModel.signOut = new Date();
                 tokenModel.update();*/
-             
+
                 return res.status(200).json({ ok: true, menssage: "Token sign out correct" });
 
-            } else {                
+            } else {
                 return res.status(401).send({ ok: false, message: 'Token invalid, ' + err.name + ' ' + err.message + '.' });
             }
         });
-        
+
     },
 
     validate: async (req, res, next) => {
@@ -127,7 +131,7 @@ module.exports = {
                 let tokenModel = await Token.findById(info.data.tokenId);
                 let userModel = await User.findById(tokenModel.generation);
                 let roleModel = await Role.findById(userModel.role);
-                
+
                 /*
                 console.log(tokenModel);
                 console.log(userModel);
@@ -138,10 +142,10 @@ module.exports = {
                     user: userModel,
                     role: roleModel
                 }
-             
+
                 return res.status(200).json({ ok: true, menssage: "Token validation correct", info: info, data: data });
 
-            } else {                
+            } else {
                 return res.status(401).send({ ok: false, message: 'Token invalid, ' + err.name + ' ' + err.message + '.' });
             }
         });
